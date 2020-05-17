@@ -3,33 +3,81 @@ package com.lps.loan.controller.model;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.lps.loan.entity.Customer;
+import com.lps.loan.entity.Borrower;
 import com.lps.loan.entity.Loan;
 
 public class CustomerLoanData {
+	@NotNull
+	private String name;
+	@NotNull
+	private String address;
+	@NotNull
+	private String contact;
 	
 	@NotNull
-	@NotEmpty
-	private Customer customerdetail;
-	
+	private String loanAmount;
 	@NotNull
-	@NotEmpty
-	private Loan loandetail;
+	private String interestRate;
 	
-	public Customer getCustomerdetail() {
-		return customerdetail;
+	public String getName() {
+		return name;
 	}
-
-	public void setCustomerdetail(Customer customerdetail) {
-		this.customerdetail = customerdetail;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public Loan getLoandetail() {
-		return loandetail;
+	public String getAddress() {
+		return address;
 	}
-
-	public void setLoandetail(Loan loandetail) {
-		this.loandetail = loandetail;
+	public void setAddress(String address) {
+		this.address = address;
 	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	
+	public String getLoanAmount() {
+		return loanAmount;
+	}
+	public void setLoanAmount(String loanAmount) {
+		this.loanAmount = loanAmount;
+	}
+	public String getInterestRate() {
+		return interestRate;
+	}
+	public void setInterestRate(String interestRate) {
+		this.interestRate = interestRate;
+	}
+	@Override
+	public String toString() {
+		return "CustomerLoanData [name=" + name + ", address=" + address + ", contact=" + contact + ", loanAmount="
+				+ loanAmount + ", interestRate=" + interestRate + "]";
+	}
+	
+//	@NotNull
+//	@NotEmpty
+//	private Customer customerdetail;
+//	
+//	@NotNull
+//	@NotEmpty
+//	private Loan loandetail;
+//	
+//	public Customer getCustomerdetail() {
+//		return customerdetail;
+//	}
+//
+//	public void setCustomerdetail(Customer customerdetail) {
+//		this.customerdetail = customerdetail;
+//	}
+//
+//	public Loan getLoandetail() {
+//		return loandetail;
+//	}
+//
+//	public void setLoandetail(Loan loandetail) {
+//		this.loandetail = loandetail;
+//	}
 
 }

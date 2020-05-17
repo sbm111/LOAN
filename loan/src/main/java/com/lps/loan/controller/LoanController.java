@@ -18,7 +18,7 @@ import com.lps.loan.service.LoanService;
  *
  */
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/borrower")
 public class LoanController {
 	
 	@Autowired
@@ -32,8 +32,6 @@ public class LoanController {
 	@PostMapping("/createloan")
 	public @ResponseBody Map<String,Object> createCustomerLoan(@RequestBody CustomerLoanData customerLoanData){
 		System.out.println("Service call start for create loan");
-		System.out.println("Customer Details: "+customerLoanData.getCustomerdetail());
-		System.out.println("Loan Details: "+customerLoanData.getLoandetail());
 		return loanService.createCustomerLoan(customerLoanData);
 	}
 

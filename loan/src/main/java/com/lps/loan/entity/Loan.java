@@ -1,7 +1,12 @@
 package com.lps.loan.entity;
 
+import java.util.Date;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,10 +27,11 @@ public class Loan {
 	@NotNull
 	private Double interestRate;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "borrower_id", nullable = false)
     @JsonIgnore
-    private Customer customer;
+    private Borrower customer;
 
 	public Long getId() {
 		return id;
@@ -59,11 +65,11 @@ public class Loan {
 		this.interestRate = interestRate;
 	}
 
-	public Customer getCustomer() {
+	public Borrower getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Borrower customer) {
 		this.customer = customer;
 	}
 
