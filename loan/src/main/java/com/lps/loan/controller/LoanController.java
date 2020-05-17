@@ -2,6 +2,8 @@ package com.lps.loan.controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,8 @@ import com.lps.loan.service.LoanService;
 @RequestMapping("/borrower")
 public class LoanController {
 	
+	Logger logger = LoggerFactory.getLogger(LoanController.class);
+	
 	@Autowired
 	LoanService loanService;
 	
@@ -31,7 +35,7 @@ public class LoanController {
 	 */
 	@PostMapping("/createloan")
 	public @ResponseBody Map<String,Object> createCustomerLoan(@RequestBody CustomerLoanData customerLoanData){
-		System.out.println("Service call start for create loan");
+		logger.info("Service call start for create loan");
 		return loanService.createCustomerLoan(customerLoanData);
 	}
 

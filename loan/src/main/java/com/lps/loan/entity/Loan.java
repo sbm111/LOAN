@@ -1,12 +1,9 @@
 package com.lps.loan.entity;
 
-import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

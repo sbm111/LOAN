@@ -2,11 +2,12 @@ package com.lps.loan.service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +18,13 @@ import com.lps.loan.dao.LoanRepository;
 import com.lps.loan.entity.Borrower;
 import com.lps.loan.entity.Loan;
 
+/**
+ * LoanService is for create Loan
+ */
 @Service
 public class LoanServiceImpl implements LoanService{
+	
+	Logger logger = LoggerFactory.getLogger(LoanServiceImpl.class);
 	
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -35,20 +41,25 @@ public class LoanServiceImpl implements LoanService{
 		//Insert Borrower Detail
 		Borrower borrower = populateCustomerData(customerLoanData);
 		borrower = customerRepository.save(borrower);
-		System.out.println("Customer data saved");
+		logger.debug("Borrower data saved ."+borrower);
 		
+		//Insert Loan Detail for Borrower
 		Loan loan = populateLoanData(customerLoanData, borrower);
 		loan = loanRepository.save(loan);
-		System.out.println("Loan data saved");
+		logger.debug("Loan data saved."+loan);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("success", "You have successfully applied for loan. Your loan number is "+loan.getLoanNumber());
 		
-		System.out.println("You have successfully applied for loan. Your loan number is "+loan.getLoanNumber());
+		logger.info("You have successfully applied for loan. Your loan number is "+loan.getLoanNumber());
 		return map;
 	}
 	
-	
+	/**
+	 * Populate Borrower details.
+	 * @param customerLoanData
+	 * @return
+	 */
 	public Borrower populateCustomerData(CustomerLoanData customerLoanData) {
 		Borrower borrower = new Borrower();
 		borrower.setAddress(customerLoanData.getAddress());
@@ -57,6 +68,12 @@ public class LoanServiceImpl implements LoanService{
 		return borrower;
 	}
 	
+	/**
+	 * Populate Loan details.
+	 * @param customerLoanData
+	 * @param customer
+	 * @return
+	 */
 	public Loan populateLoanData(CustomerLoanData customerLoanData,Borrower customer) {
 		Loan loan = new Loan();
 		loan.setLoanAmount(Double.parseDouble(customerLoanData.getLoanAmount())); 
@@ -74,7 +91,7 @@ public class LoanServiceImpl implements LoanService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		System.out.println(sdf.format(timestamp));
-		int random1 = new Random().nextInt(90) + 10;
+		int random1 = new Random().nextInt(900) + 100;
 		return random1+sdf.format(timestamp);
 	}
 
